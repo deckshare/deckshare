@@ -71,6 +71,7 @@ GEM
       rake (>= 10.4, < 14.0)
     ast (2.4.2)
     backport (1.2.0)
+    bcrypt (3.1.18)
     benchmark (0.2.0)
     bootsnap (1.13.0)
       msgpack (~> 1.2)
@@ -246,6 +247,7 @@ PLATFORMS
 
 DEPENDENCIES
   annotate
+  bcrypt (~> 3.1.7)
   bootsnap
   debug
   factory_bot_rails
