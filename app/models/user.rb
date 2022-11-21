@@ -34,14 +34,6 @@ class User < ApplicationRecord
 
   scope :confirmed, -> { where.not(confirmed_at: nil) }
 
-  def confirm
-    self.confirmed_at = Time.zone.now
-  end
-
-  def confirm!
-    confirm && save!
-  end
-
   def confirmed?
     confirmed_at?
   end

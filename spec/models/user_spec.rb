@@ -37,18 +37,16 @@ RSpec.describe User do
     it { is_expected.not_to be_valid }
   end
 
-  context 'when #confirm is called' do
-    before { user.confirm }
-
-    it { is_expected.to     be_confirmed }
-    it { is_expected.not_to be_persisted }
-  end
-
-  context 'when #confirm! is called' do
-    before { user.confirm! }
+  context 'with confirmed_at' do
+    before { user.confirmed_at = Faker::Time.backward }
 
     it { is_expected.to be_confirmed }
-    it { is_expected.to be_persisted }
+  end
+
+  context 'without confirmed_at' do
+    before { user.confirmed_at = nil }
+
+    it { is_expected.not_to be_confirmed }
   end
 
   describe '.confirmed' do

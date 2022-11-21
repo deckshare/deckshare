@@ -55,3 +55,9 @@ group :development do
   gem 'rubocop-rspec', require: false
   gem 'solargraph', require: false
 end
+
+group :test do
+  gem 'mocha'
+end
+
+gem 'service_actor-rails'
