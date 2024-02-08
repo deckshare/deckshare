@@ -1,0 +1,26 @@
+{
+  "sqltools.connections": [
+    {
+      "database": "deckshare_development",
+      "driver": "PostgreSQL",
+      "group": "Deckshare",
+      "name": "Development",
+      "password": "",
+      "port": 5432,
+      "previewLimit": 50,
+      "server": "localhost",
+      "username": "postgres"
+    },
+    {
+      "database": "deckshare_test",
+      "driver": "PostgreSQL",
+      "group": "Deckshare",
+      "name": "Test",
+      "password": "",
+      "port": 5432,
+      "previewLimit": 50,
+      "server": "localhost",
+      "username": "postgres"
+    }
+  ]
+}
