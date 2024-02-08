@@ -1,4 +1,8 @@
 class SessionsController < ApplicationController
+  skip_before_action :current_user, except: :destroy
+
+  before_action :no_current_user, only: %i[new create]
+
   def new
     @session = Session.new
   end

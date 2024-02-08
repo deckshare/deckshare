@@ -1,6 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe "User", type: :request do
+  let(:user) { FactoryBot.create(:user) }
+
   describe "GET /new" do
     it "returns http success" do
       get "/user/new"
@@ -9,6 +11,11 @@ RSpec.describe "User", type: :request do
   end
 
   describe "GET /edit" do
+    before do
+      post "/session", params: { session: { email: user.email, password: user.password } }
+      expect(response).to redirect_to(user_url)
+    end
+
     it "returns http success" do
       get "/user/edit"
       expect(response).to have_http_status(:success)
@@ -16,6 +23,11 @@ RSpec.describe "User", type: :request do
   end
 
   describe "GET /" do
+    before do
+      post "/session", params: { session: { email: user.email, password: user.password } }
+      expect(response).to redirect_to(user_url)
+    end
+
     it "returns http success" do
       get "/user"
       expect(response).to have_http_status(:success)
@@ -23,6 +35,11 @@ RSpec.describe "User", type: :request do
   end
 
   describe "PATCH /" do
+    before do
+      post "/session", params: { session: { email: user.email, password: user.password } }
+      expect(response).to redirect_to(user_url)
+    end
+
     it "redirects to show" do
       patch "/user"
       expect(response).to redirect_to(action: :show)
@@ -30,6 +47,11 @@ RSpec.describe "User", type: :request do
   end
 
   describe "PUT /" do
+    before do
+      post "/session", params: { session: { email: user.email, password: user.password } }
+      expect(response).to redirect_to(user_url)
+    end
+
     it "redirects to show" do
       put "/user"
       expect(response).to redirect_to(action: :show)
@@ -37,6 +59,11 @@ RSpec.describe "User", type: :request do
   end
 
   describe "DELETE /" do
+    before do
+      post "/session", params: { session: { email: user.email, password: user.password } }
+      expect(response).to redirect_to(user_url)
+    end
+
     it "redirects to new" do
       delete "/user"
       expect(response).to redirect_to(action: :new)
