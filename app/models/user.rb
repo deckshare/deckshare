@@ -8,4 +8,16 @@ class User < ApplicationRecord
             uniqueness: { case_sensitive: false }
 
   validates :username, presence: true, uniqueness: { case_sensitive: false }
+
+  class << self
+    def find_and_authenticate_by!(email:, password:)
+      find_by!(email:).authenticate!(password)
+    rescue ActiveRecord::RecordNotFound
+      raise Deckshare::Errors::AuthenticationError
+    end
+  end
+
+  def authenticate!(password)
+    authenticate(password) or raise Deckshare::Errors::AuthenticationError
+  end
 end
