@@ -1,9 +1,15 @@
 class UsersController < ApplicationController
   def new
+    @user = User.new
   end
 
   def create
+    @user = User.new(create_params)
+    @user.save!
+
     redirect_to action: :show
+  rescue ActiveRecord::RecordInvalid
+    render action: :new, status: :unprocessable_entity
   end
 
   def show
@@ -18,5 +24,11 @@ class UsersController < ApplicationController
 
   def destroy
     redirect_to action: :new
+  end
+
+  private
+
+  def create_params
+    params.require(:user).permit(*%i[username email password password_confirmation])
   end
 end
