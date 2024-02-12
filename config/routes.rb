@@ -7,6 +7,10 @@ Rails.application.routes.draw do
   resource :session, only: %i[new create destroy]
   resource :user
 
+  namespace :pokemon do
+    resources :cards, only: %i[index show]
+  end
+
   # Defines the root path route ("/")
   # root "posts#index"
 end

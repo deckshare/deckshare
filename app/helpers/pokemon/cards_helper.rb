@@ -1,0 +1,2 @@
+module Pokemon::CardsHelper
+end
