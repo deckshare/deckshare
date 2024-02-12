@@ -71,22 +71,21 @@ RSpec.describe "User", type: :request do
   end
 
   describe "POST /" do
+    subject(:_response) do
+      post "/user", params: { user: }
+      response
+    end
+
     let(:user) { FactoryBot.attributes_for(:user) }
 
     context "with valid params" do
-      it "redirects to show" do
-        post "/user", params: { user: }
-        expect(response).to redirect_to(action: :show)
-      end
+      it { is_expected.to redirect_to(action: :show) }
     end
 
     context "with invalid params" do
       before { User.create(user) }
 
-      it "returns http unprocessable entity" do
-        post "/user", params: { user: }
-        expect(response).to have_http_status(:unprocessable_entity)
-      end
+      it { is_expected.to have_http_status(:unprocessable_entity) }
     end
   end
 

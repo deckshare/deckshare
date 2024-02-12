@@ -25,25 +25,38 @@ RSpec.describe "Sessions", type: :request do
   end
 
   describe "POST /" do
+    subject(:_response) do
+      post "/session", params: { session: { email:, password: } }
+      response
+    end
+
     context "with correct credentials" do
-      it "redirects to user show" do
-        post "/session", params: { session: { email: user.email, password: user.password } }
-        expect(response).to redirect_to(user_url)
-      end
+      let(:email) { user.email }
+      let(:password) { user.password }
+
+      it { is_expected.to redirect_to(user_url) }
+      # it "redirects to user show" do
+      #   post "/session", params: { session: { email: user.email, password: user.password } }
+      #   expect(response).to redirect_to(user_url)
+      # end
     end
 
     context "with incorrect password" do
-      it "returns http unauthorized" do
-        post "/session", params: { session: { email: user.email, password: Faker::Internet.password } }
-        expect(response).to have_http_status(:unauthorized)
-      end
+      let(:email) { user.email }
+      let(:password) { Faker::Internet.password }
+
+      it { is_expected.to have_http_status(:unauthorized) }
+      # it "returns http unauthorized" do
+      #   post "/session", params: { session: { email: user.email, password: Faker::Internet.password } }
+      #   expect(response).to have_http_status(:unauthorized)
+      # end
     end
 
     context "with incorrect email" do
-      it "returns http unauthorized" do
-        post "/session", params: { session: FactoryBot.attributes_for(:user) }
-        expect(response).to have_http_status(:unauthorized)
-      end
+      let(:email) { Faker::Internet.email }
+      let(:password) { Faker::Internet.password }
+
+      it { is_expected.to have_http_status(:unauthorized) }
     end
   end
 
