@@ -10,6 +10,4 @@ class Pokemon::CardsController < ApplicationController
   rescue ArgumentError
     redirect_to action: :index, status: :not_found
   end
-
-  private
 end

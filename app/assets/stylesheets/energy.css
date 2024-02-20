@@ -1,0 +1,50 @@
+i.energy {
+    background-image: url('energy.png');
+    width: 32px;
+    aspect-ratio: 1;
+    background-size: cover;
+}
+
+i.energy.colorless {
+    background-position-y: calc(100% * 0);
+}
+
+i.energy.dark {
+    background-position-y: calc(100% * -1);
+}
+
+i.energy.dragon {
+    background-position-y: calc(100% * -2);
+}
+
+i.energy.electric {
+    background-position-y: calc(100% * -3);
+}
+
+i.energy.fairy {
+    background-position-y: calc(100% * -4);
+}
+
+i.energy.fighting {
+    background-position-y: calc(100% * -5);
+}
+
+i.energy.fire {
+    background-position-y: calc(100% * -6);
+}
+
+i.energy.grass {
+    background-position-y: calc(100% * -7);
+}
+
+i.energy.psychic {
+    background-position-y: calc(100% * -8);
+}
+
+i.energy.steel {
+    background-position-y: calc(100% * -9);
+}
+
+i.energy.water {
+    background-position-y: calc(100% * -10);
+}
