@@ -1,0 +1,14 @@
+{
+  "configurations": [
+    {
+      "type": "ruby_lsp",
+      "request": "launch",
+      "name": "Rails server",
+      "program": "bin/rails server -p 3000",
+      "preLaunchTask": "tailwind",
+      "env": {
+        "RUBY_DEBUG_OPEN": "true"
+      }
+    }
+  ]
+}
