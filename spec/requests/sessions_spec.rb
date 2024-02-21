@@ -1,26 +1,11 @@
 require 'rails_helper'
 
-RSpec.describe "Sessions", type: :request do
+RSpec.describe "Session", type: :request do
   let(:user) { FactoryBot.create(:user) }
 
   describe "GET /new" do
-    context "without a current user" do
-      it "returns http success" do
-        get "/session/new"
-        expect(response).to have_http_status(:success)
-      end
-    end
-
-    context "with a current user" do
-      before do
-        post "/session", params: { session: { email: user.email, password: user.password } }
-        expect(response).to redirect_to(user_url)
-      end
-
-      it "redirects to user show" do
-        get "/session/new"
-        assert_redirected_to user_url, status: :forbidden
-      end
+    it_behaves_like "an unauthenticated route" do
+      let(:request) { get "/session/new" }
     end
   end
 
@@ -53,13 +38,9 @@ RSpec.describe "Sessions", type: :request do
   end
 
   describe "DELETE /" do
-    it "redirects to session new" do
-      post "/session", params: { session: { email: user.email, password: user.password } }
-      expect(response).to redirect_to(user_url)
-
-      delete "/session"
-      expect(response).to redirect_to(new_session_url)
+    it_behaves_like "an authenticated route" do
+      let(:request) { delete "/session" }
+      let(:match_expectation) { redirect_to(new_session_url) }
     end
   end
-
 end
