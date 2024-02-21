@@ -19,7 +19,7 @@ RSpec.describe "Sessions", type: :request do
 
       it "redirects to user show" do
         get "/session/new"
-        expect(response).to redirect_to(user_url)
+        assert_redirected_to user_url, status: :forbidden
       end
     end
   end
@@ -35,10 +35,6 @@ RSpec.describe "Sessions", type: :request do
       let(:password) { user.password }
 
       it { is_expected.to redirect_to(user_url) }
-      # it "redirects to user show" do
-      #   post "/session", params: { session: { email: user.email, password: user.password } }
-      #   expect(response).to redirect_to(user_url)
-      # end
     end
 
     context "with incorrect password" do
@@ -46,10 +42,6 @@ RSpec.describe "Sessions", type: :request do
       let(:password) { Faker::Internet.password }
 
       it { is_expected.to have_http_status(:unauthorized) }
-      # it "returns http unauthorized" do
-      #   post "/session", params: { session: { email: user.email, password: Faker::Internet.password } }
-      #   expect(response).to have_http_status(:unauthorized)
-      # end
     end
 
     context "with incorrect email" do

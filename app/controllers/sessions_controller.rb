@@ -1,7 +1,8 @@
 class SessionsController < ApplicationController
-  skip_before_action :current_user, except: :destroy
+  include Authentication
 
-  before_action :no_current_user, only: %i[new create]
+  before_action :authenticate!, only: :destroy
+  before_action :unauthenticate!, only: %i[new create]
 
   def new
     @session = Session.new

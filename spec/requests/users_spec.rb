@@ -4,9 +4,23 @@ RSpec.describe "User", type: :request do
   let(:user) { FactoryBot.create(:user) }
 
   describe "GET /new" do
-    it "returns http success" do
-      get "/user/new"
-      expect(response).to have_http_status(:success)
+    context "without a current user" do
+      it "returns http success" do
+        get "/user/new"
+        expect(response).to have_http_status(:success)
+      end
+    end
+
+    context "with a current user" do
+      before do
+        post "/session", params: { session: { email: user.email, password: user.password } }
+        expect(response).to redirect_to(user_url)
+      end
+
+      it "redirects to user show" do
+        get "/user/new"
+        assert_redirected_to user_url, status: :forbidden
+      end
     end
   end
 
