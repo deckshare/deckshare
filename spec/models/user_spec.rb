@@ -40,13 +40,18 @@ RSpec.describe User, type: :model do
 
     let(:card_id) { "xy1-1" }
     let(:initial_quantity) { 2 }
+    let(:quantity) { 1 }
 
     before { FactoryBot.create(:deckshare_pokemon_card, user:, quantity: initial_quantity) }
 
     context "with a quantity between 1 and card.quantity" do
-      let(:quantity) { 1 }
-
       it { expect { remove_pokemon_card! }.to change { user.pokemon_cards.find_by(card_id:).quantity }.from(initial_quantity).to(initial_quantity - quantity) }
+    end
+
+    context "with an quantity and a card.quantity of 1" do
+      let(:initial_quantity) { 1 }
+
+      it { expect { remove_pokemon_card! }.to change { user.pokemon_cards.where(card_id:).count }.from(1).to(0) }
     end
 
     context "with a quantity equal to card.quantity" do
