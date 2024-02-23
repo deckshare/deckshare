@@ -3,7 +3,7 @@ class CreateDecksharePokemonCards < ActiveRecord::Migration[7.1]
     create_table :deckshare_pokemon_cards, id: :uuid do |t|
       t.references :user, null: false, foreign_key: true, type: :uuid
       t.string :card_id
-      t.integer :quantity
+      t.integer :quantity, null: false, default: 0
 
       t.timestamps
     end

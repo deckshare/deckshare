@@ -22,4 +22,26 @@ class User < ApplicationRecord
   def authenticate!(password)
     authenticate(password) or raise Deckshare::Errors::AuthenticationError
   end
+
+  def add_pokemon_card!(card_id:, quantity: 1)
+    raise RangeError, "#{quantity} not greater than 0" unless quantity > 0
+
+    card = pokemon_cards.find_or_initialize_by(card_id:)
+    card.quantity += quantity
+    card.save!
+  end
+
+  def remove_pokemon_card!(card_id:, quantity: 1)
+    card = pokemon_cards.find_by!(card_id:)
+
+    case quantity
+    when card.quantity
+      card.destroy!
+    when 1...card.quantity
+      card.quantity -= quantity
+      card.save!
+    else
+      raise RangeError, "#{quantity} not in range 1..#{card.quantity}"
+    end
+  end
 end
