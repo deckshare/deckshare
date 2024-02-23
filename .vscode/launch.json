@@ -4,8 +4,8 @@
       "type": "ruby_lsp",
       "request": "launch",
       "name": "Rails server",
-      "program": "bin/rails server -p 3000",
-      "preLaunchTask": "tailwind",
+      "program": "bin/rails server",
+      "preLaunchTask": "rails tailwindcss:watch",
       "env": {
         "RUBY_DEBUG_OPEN": "true"
       }

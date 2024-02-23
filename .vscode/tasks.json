@@ -4,10 +4,30 @@
   "version": "2.0.0",
   "tasks": [
     {
-      "label": "tailwind",
+      "label": "rails console",
+      "type": "shell",
+      "command": "bin/rails c",
+      "isBackground": true,
+      "problemMatcher": []
+    },
+    {
+      "label": "rails db:migrate",
+      "type": "shell",
+      "command": "bin/rails db:migrate",
+      "problemMatcher": []
+    },
+    {
+      "label": "rails db:rollback",
+      "type": "shell",
+      "command": "bin/rails db:rollback",
+      "problemMatcher": []
+    },
+    {
+      "label": "rails tailwindcss:watch",
       "type": "shell",
       "command": "bin/rails tailwindcss:watch",
-      "isBackground": true
+      "isBackground": true,
+      "problemMatcher": []
     }
   ]
 }
