@@ -1,8 +1,8 @@
 class ApplicationRecord < ActiveRecord::Base
   primary_abstract_class
 
-  scope :integer_in_array, ->(value, column) { where("#{value} = any(#{column})") }
-  scope :string_in_array,  ->(value, column) { where("'#{value}' = any(#{column})") }
+  scope :integer_in_array, ->(value, column) { where("#{value} = ANY (#{column})") }
+  scope :string_in_array,  ->(value, column) { where("'#{value}' = ANY (#{column})") }
   scope :object_in_array,  ->(value, column) { where("#{column} @> '[#{value.to_json}]'") }
 
   class << self

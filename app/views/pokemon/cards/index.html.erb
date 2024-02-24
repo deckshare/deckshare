@@ -3,7 +3,7 @@
   <p>Find me in app/views/pokemon/cards/index.html.erb</p>
   <ul>
     <% @cards&.each do |card| %>
-      <li><%= link_to card.id, pokemon_card_path(id: card.id) %> <%= card.name %></li>
+      <li><%= link_to card.card_id, card %> <%= card.name %></li>
     <% end %>
   </ul>
 </div>

@@ -1,4 +1,6 @@
 class Pokemon::Card < ApplicationRecord
+  searchkick
+
   attribute :abilities, Ability.to_array_type
   attribute :attacks, Attack.to_array_type
   attribute :images, Images.to_type
@@ -30,6 +32,10 @@ class Pokemon::Card < ApplicationRecord
     def types
       array_agg(:types)
     end
+  end
+
+  def to_param
+    card_id
   end
 
   def alternates

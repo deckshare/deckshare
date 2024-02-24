@@ -74,3 +74,6 @@ group :test do
 end
 
 gem "store_model", "~> 2.2"
+
+gem "searchkick", "~> 5.3"
+gem "opensearch-ruby", "~> 3.1"
