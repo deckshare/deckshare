@@ -45,6 +45,7 @@ jobs:
       - uses: ruby/setup-ruby@v1
         with:
           bundler-cache: true
+      - uses: ankane/setup-opensearch@v1
       - run: sudo ln -s $(which zcat) /usr/bin/gzcat
       - run: bin/rails db:setup
       - uses: actions/cache@v4
