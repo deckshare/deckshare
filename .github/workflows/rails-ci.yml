@@ -45,7 +45,7 @@ jobs:
       - uses: ruby/setup-ruby@v1
         with:
           bundler-cache: true
-      - run: sudo apt-get install gzip
+      - run: sudo ln -s $(which zcat) /usr/bin/gzcat
       - run: bin/rails db:setup
       - uses: actions/cache@v4
         id: asset_cache
