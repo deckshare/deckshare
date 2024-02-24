@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_02_24_005726) do
+ActiveRecord::Schema[7.1].define(version: 2024_02_24_011027) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -33,6 +33,46 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_24_005726) do
     t.index ["card_id"], name: "index_deckshare_pokemon_user_cards_on_card_id"
     t.index ["user_id", "card_id"], name: "index_deckshare_pokemon_user_cards_on_user_id_and_card_id", unique: true
     t.index ["user_id"], name: "index_deckshare_pokemon_user_cards_on_user_id"
+  end
+
+  create_table "pokemon_cards", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "card_id"
+    t.string "name"
+    t.string "supertype"
+    t.string "subtypes", array: true
+    t.string "level"
+    t.string "hp"
+    t.string "types", array: true
+    t.string "evolves_from"
+    t.string "evolves_to", array: true
+    t.string "rules", array: true
+    t.jsonb "ancient_trait"
+    t.jsonb "abilities"
+    t.jsonb "attacks"
+    t.jsonb "weaknesses"
+    t.jsonb "resistances"
+    t.string "retreat_cost", array: true
+    t.integer "converted_retreat_cost"
+    t.uuid "pokemon_set_id", null: false
+    t.string "number"
+    t.string "artist"
+    t.string "rarity"
+    t.string "flavor_text"
+    t.integer "national_pokedex_numbers", array: true
+    t.jsonb "legalities"
+    t.string "regulation_mark"
+    t.jsonb "images"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["card_id"], name: "index_pokemon_cards_on_card_id", unique: true
+    t.index ["evolves_to"], name: "index_pokemon_cards_on_evolves_to", using: :gin
+    t.index ["name"], name: "index_pokemon_cards_on_name"
+    t.index ["national_pokedex_numbers"], name: "index_pokemon_cards_on_national_pokedex_numbers", using: :gin
+    t.index ["pokemon_set_id"], name: "index_pokemon_cards_on_pokemon_set_id"
+    t.index ["retreat_cost"], name: "index_pokemon_cards_on_retreat_cost", using: :gin
+    t.index ["rules"], name: "index_pokemon_cards_on_rules", using: :gin
+    t.index ["subtypes"], name: "index_pokemon_cards_on_subtypes", using: :gin
+    t.index ["types"], name: "index_pokemon_cards_on_types", using: :gin
   end
 
   create_table "pokemon_sets", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -65,4 +105,5 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_24_005726) do
 
   add_foreign_key "deckshare_pokemon_cards", "users"
   add_foreign_key "deckshare_pokemon_user_cards", "users"
+  add_foreign_key "pokemon_cards", "pokemon_sets"
 end
