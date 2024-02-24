@@ -1,4 +1,8 @@
 class Pokemon::Card < ApplicationRecord
+  attribute :images, Images.to_type
+  attribute :attacks, Attack.to_array_type
+  attribute :weaknesses, Weakness.to_array_type
+
   belongs_to :set, foreign_key: "pokemon_set_id", inverse_of: :cards
 
   class << self
