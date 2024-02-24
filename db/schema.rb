@@ -24,17 +24,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_24_011027) do
     t.index ["user_id"], name: "index_deckshare_pokemon_cards_on_user_id"
   end
 
-  create_table "deckshare_pokemon_user_cards", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.uuid "user_id", null: false
-    t.string "card_id"
-    t.integer "quantity"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["card_id"], name: "index_deckshare_pokemon_user_cards_on_card_id"
-    t.index ["user_id", "card_id"], name: "index_deckshare_pokemon_user_cards_on_user_id_and_card_id", unique: true
-    t.index ["user_id"], name: "index_deckshare_pokemon_user_cards_on_user_id"
-  end
-
   create_table "pokemon_cards", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "card_id"
     t.string "name"
@@ -104,6 +93,5 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_24_011027) do
   end
 
   add_foreign_key "deckshare_pokemon_cards", "users"
-  add_foreign_key "deckshare_pokemon_user_cards", "users"
   add_foreign_key "pokemon_cards", "pokemon_sets"
 end
