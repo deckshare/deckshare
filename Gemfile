@@ -73,4 +73,4 @@ group :test do
   gem "selenium-webdriver"
 end
 
-gem "pokemon_tcg_sdk", github: "deckshare/pokemon-tcg-sdk-ruby"
+# gem "pokemon_tcg_sdk", github: "deckshare/pokemon-tcg-sdk-ruby"
