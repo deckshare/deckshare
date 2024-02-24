@@ -26,4 +26,8 @@ class Pokemon::Card < ApplicationRecord
         .flatten
     end
   end
+
+  def alternates
+    Card.where(name:, set_id:).excluding(self)
+  end
 end
