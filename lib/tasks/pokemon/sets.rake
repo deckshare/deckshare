@@ -14,6 +14,8 @@ namespace :pokemon do
 
         Pokemon::Set.find_or_initialize_by(set_id:).update(**set_data)
       end
+
+      Pokemon::Set.reindex
     end
   end
 end

@@ -23,6 +23,8 @@ namespace :pokemon do
       end
 
       puts "Loaded #{total} cards"
+
+      Pokemon::Card.reindex
     end
   end
 end
