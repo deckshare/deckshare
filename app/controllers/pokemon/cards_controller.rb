@@ -4,8 +4,6 @@ class Pokemon::CardsController < ApplicationController
   end
 
   def show
-    @card = Pokemon::Card.find(params[:id])
-  rescue ArgumentError
-    redirect_to action: :index, status: :not_found
+    @card = Pokemon::Card.find_by!(card_id: params[:id])
   end
 end
