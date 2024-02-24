@@ -6,28 +6,29 @@ class Pokemon::Card < ApplicationRecord
 
   belongs_to :set, foreign_key: "pokemon_set_id", inverse_of: :cards
 
-  scope :having_attack_name, ->(name) { where("attacks @> '[{\"name\":\"#{name}\"}]'") }
-  scope :having_ability_name, ->(name) { where("abilities @> '[{\"name\":\"#{name}\"}]'") }
+  scope :evolves_to,       ->(name)   { string_in_array(name, :evolves_to) }
+  scope :has_ability_name, ->(name)   { object_in_array({ name: }, :abilities) }
+  scope :has_attack_name,  ->(name)   { object_in_array({ name: }, :attacks) }
+  scope :has_dex_number,   ->(number) { integer_in_array(number, :national_pokedex_numbers) }
+  scope :has_subtype,      ->(name)   { string_in_array(name, :subtypes) }
+  scope :has_type,         ->(name)   { string_in_array(name, :types) }
+  scope :has_weakness,     ->(type)   { object_in_array({ type: }, :weaknesses) }
 
   class << self
     def regulation_marks
-      distinct.order(:regulation_mark).pluck(:regulation_mark)
+      pluck_distinct(:regulation_mark)
     end
 
     def subtypes
-      joins('cross join unnest(subtypes) as subtype where subtype is not null')
-        .pluck(Arel.sql('array_agg(distinct subtype order by subtype asc)'))
-        .flatten
+      array_agg(:subtypes)
     end
 
     def supertypes
-      distinct.order(:supertype).pluck(:supertype)
+      pluck_distinct(:supertype)
     end
 
     def types
-      joins('cross join unnest(types) as ptype where ptype is not null')
-        .pluck(Arel.sql('array_agg(distinct ptype order by ptype asc)'))
-        .flatten
+      array_agg(:types)
     end
   end
 
