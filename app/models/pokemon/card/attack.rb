@@ -6,4 +6,10 @@ class Pokemon::Card::Attack
   attribute :text, :string
   attribute :damage, :string
   attribute :converted_energy_cost, :integer
+
+  class << self
+    def names
+      Pokemon::Card.attack_names
+    end
+  end
 end

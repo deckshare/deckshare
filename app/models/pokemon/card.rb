@@ -19,6 +19,14 @@ class Pokemon::Card < ApplicationRecord
   scope :search_import, -> { includes(:set) }
 
   class << self
+    def ability_names
+      array_elements(:abilities, :name)
+    end
+
+    def attack_names
+      array_elements(:attacks, :name)
+    end
+
     def regulation_marks
       pluck_distinct(:regulation_mark)
     end
