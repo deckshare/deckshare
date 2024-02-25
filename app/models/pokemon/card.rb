@@ -1,4 +1,6 @@
 class Pokemon::Card < ApplicationRecord
+  extend Pagy::Searchkick
+
   DEFAULT_SEARCH_FIELDS = %i[
     name
     supertype

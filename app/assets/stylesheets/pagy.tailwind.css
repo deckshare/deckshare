@@ -1,0 +1,23 @@
+.pagy {
+  @apply flex space-x-1 font-semibold text-sm text-gray-500;
+}
+.pagy .page a {
+  @apply block rounded-lg px-3 py-1 bg-gray-200;
+}
+.pagy .page a:hover {
+  @apply bg-gray-300;
+}
+.pagy .page.active a {
+  @apply text-white bg-gray-400 cursor-default;
+}
+.pagy .page.disabled a {
+  @apply text-gray-300 bg-gray-100 cursor-default;
+}
+.pagy .pagy-combo-input,
+.pagy.pagy-items-selector-js {
+  @apply inline-block bg-gray-200 rounded-lg px-3 py-0.5;
+}
+.pagy .pagy-combo-input input,
+.pagy.pagy-items-selector-js input {
+  @apply bg-gray-100 border-none rounded-md;
+}
