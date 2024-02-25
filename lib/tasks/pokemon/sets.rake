@@ -8,14 +8,14 @@ namespace :pokemon do
       data = URI.open(data_url)
       sets = JSON.load(data)
 
-      sets.map(&:with_indifferent_access).each do |set_data|
-        set_data[:set_id] = set_id = set_data.delete(:id)
-        set_data.deep_transform_keys! { |key| key.to_s.underscore }
+      Searchkick.callbacks(:bulk) do
+        sets.map(&:with_indifferent_access).each do |set_data|
+          set_data[:set_id] = set_id = set_data.delete(:id)
+          set_data.deep_transform_keys! { |key| key.to_s.underscore }
 
-        Pokemon::Set.find_or_initialize_by(set_id:).update(**set_data)
+          Pokemon::Set.find_or_initialize_by(set_id:).update(**set_data)
+        end
       end
-
-      Pokemon::Set.reindex
     end
   end
 end
