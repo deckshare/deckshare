@@ -79,4 +79,8 @@ class Pokemon::Card < ApplicationRecord
   def to_param
     card_id
   end
+
+  def to_s
+    "#{name} - #{set.name} #{number}"
+  end
 end

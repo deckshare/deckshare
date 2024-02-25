@@ -1,0 +1,9 @@
+@layer components {
+  .cards-page {
+    @apply flex flex-col gap-4 items-center;
+  }
+
+  .cards-grid {
+    @apply flex flex-wrap gap-4 justify-center;
+  }
+}

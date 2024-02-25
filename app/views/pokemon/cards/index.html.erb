@@ -1,14 +1,12 @@
-<div>
-  <h1 class="font-bold text-4xl">Pokemon::Cards#index</h1>
-  <p>Find me in app/views/pokemon/cards/index.html.erb</p>
-  <ul>
+<div class="cards-page">
+  <div class="cards-grid">
     <% @cards&.each do |card| %>
-      <li><%= link_to card.card_id, card %> <%= card.name %></li>
+      <div><%= link_to image_tag(card.images.small, alt: card), card %></div>
     <% end %>
-  </ul>
+  </div>
   <% if @pagy %>
     <div data-controller="pagy-initializer">
-      <%== pagy_combo_nav_js(@pagy) %>
+      <%== pagy_nav_js(@pagy) %>
     </div>
   <% end %>
 </div>
