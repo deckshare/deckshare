@@ -1,4 +1,6 @@
 class Pokemon::Card < ApplicationRecord
+  DEFAULT_SEARCH_FIELDS = %i[name types subtypes abilities.name attacks.name].freeze
+
   searchkick
 
   attribute :abilities, Ability.to_array_type
