@@ -1,4 +1,26 @@
 class Pokemon::Card < ApplicationRecord
+  DEFAULT_SEARCH_FIELDS = %i[
+    name
+    supertype
+    subtypes
+    types
+    evolves_from
+    evolves_to
+    rules
+    ancient_trait
+    abilities.name
+    abilities.text
+    attacks.name
+    attacks.text
+    legalities
+    artist
+    rarity
+    set.name
+    set.series
+    set.legalities
+    set.ptcgo_code
+  ].freeze
+
   searchkick
 
   attribute :abilities, Ability.to_array_type

@@ -1,6 +1,6 @@
 class Pokemon::CardsController < ApplicationController
   def index
-    @cards = Pokemon::Card.search(params[:q]) if params.has_key?(:q)
+    @cards = Pokemon::Card.search(params[:q], fields: Pokemon::Card::DEFAULT_SEARCH_FIELDS) if params.has_key?(:q)
   end
 
   def show
