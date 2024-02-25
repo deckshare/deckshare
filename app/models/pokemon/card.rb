@@ -1,6 +1,4 @@
 class Pokemon::Card < ApplicationRecord
-  DEFAULT_SEARCH_FIELDS = %i[name types subtypes abilities.name attacks.name].freeze
-
   searchkick
 
   attribute :abilities, Ability.to_array_type
@@ -17,6 +15,8 @@ class Pokemon::Card < ApplicationRecord
   scope :has_subtype,      ->(name)   { string_in_array(name, :subtypes) }
   scope :has_type,         ->(name)   { string_in_array(name, :types) }
   scope :has_weakness,     ->(type)   { object_in_array({ type: }, :weaknesses) }
+
+  scope :search_import, -> { includes(:set) }
 
   class << self
     def regulation_marks
@@ -36,11 +36,15 @@ class Pokemon::Card < ApplicationRecord
     end
   end
 
-  def to_param
-    card_id
-  end
-
   def alternates
     Card.where(name:, set_id:).excluding(self)
+  end
+
+  def search_data
+    attributes.merge(set:)
+  end
+
+  def to_param
+    card_id
   end
 end
