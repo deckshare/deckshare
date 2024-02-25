@@ -1,7 +1,9 @@
 class Pokemon::CardsController < ApplicationController
   def index
-    cards = Pokemon::Card.pagy_search(params[:q], fields: Pokemon::Card::DEFAULT_SEARCH_FIELDS) if params.has_key?(:q)
-    @pagy, @cards = pagy_searchkick(cards)
+    if params[:q]
+      cards = Pokemon::Card.pagy_search(params[:q], fields: Pokemon::Card::DEFAULT_SEARCH_FIELDS)
+      @pagy, @cards = pagy_searchkick(cards)
+    end
   end
 
   def show
