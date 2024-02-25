@@ -6,5 +6,7 @@
       <li><%= link_to card.card_id, card %> <%= card.name %></li>
     <% end %>
   </ul>
-  <%== pagy_nav(@pagy) %>
+  <div data-controller="pagy-initializer">
+    <%== pagy_combo_nav_js(@pagy) %>
+  </div>
 </div>
