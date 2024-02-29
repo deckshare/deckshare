@@ -1,8 +1,5 @@
 i.energy {
   background-image: url("energy.png");
-  width: 32px;
-  aspect-ratio: 1;
-  background-size: cover;
 }
 
 i.energy.colorless {
