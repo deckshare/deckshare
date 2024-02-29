@@ -1,24 +1,37 @@
-# README
+# Deckshare
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+A trading card game database and platform for deck building and sharing.
 
-Things you may want to cover:
+## Development
 
-* Ruby version
+### Requirements
 
-* System dependencies
+- Ruby (see [`.ruby-version`](.ruby-version))
+- Node (or compatible runtime)
+- PostgreSQL 16
+- OpenSearch 2
 
-* Configuration
+### Setup
 
-* Database creation
+```sh
+bin/setup
+```
 
-* Database initialization
+### Running
 
-* How to run the test suite
+```sh
+bin/dev
+```
 
-* Services (job queues, cache servers, search engines, etc.)
+or run the "Rails server" debug configuration in Visual Studio Code.
 
-* Deployment instructions
+## Copyright
 
-* ...
+Deckshare website code © 2024 Jesse Brooklyn Hannah. Licensed under the terms of
+the [GNU AGPL version 3](LICENSE.md) or later.
+
+Pokémon TCG data is from the [Pokémon TCG API](https://pokemontcg.io).
+
+All trademarks used are property of their respective owners. This project is not
+affiliated with or endorsed by Nintendo, The Pokémon Company, or Wizards of the
+Coast.
