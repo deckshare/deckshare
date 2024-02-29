@@ -18,31 +18,31 @@ i.energy.dragon {
 }
 
 i.energy.fairy {
-  background-position-y: calc(100% * -4);
-}
-
-i.energy.fighting {
-  background-position-y: calc(100% * -5);
-}
-
-i.energy.fire {
-  background-position-y: calc(100% * -6);
-}
-
-i.energy.grass {
-  background-position-y: calc(100% * -7);
-}
-
-i.energy.lightning {
   background-position-y: calc(100% * -3);
 }
 
+i.energy.fighting {
+  background-position-y: calc(100% * -4);
+}
+
+i.energy.fire {
+  background-position-y: calc(100% * -5);
+}
+
+i.energy.grass {
+  background-position-y: calc(100% * -6);
+}
+
+i.energy.lightning {
+  background-position-y: calc(100% * -7);
+}
+
 i.energy.metal {
-  background-position-y: calc(100% * -9);
+  background-position-y: calc(100% * -8);
 }
 
 i.energy.psychic {
-  background-position-y: calc(100% * -8);
+  background-position-y: calc(100% * -9);
 }
 
 i.energy.water {
