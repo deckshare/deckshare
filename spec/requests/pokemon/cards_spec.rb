@@ -15,7 +15,7 @@ RSpec.describe "Pokemon::Cards", type: :request do
     end
 
     context "with a valid ID" do
-      let(:id) { "xy1-1" }
+      let(:id) { "sv4pt5-59" }
 
       it { is_expected.to have_http_status(:success) }
     end

@@ -6,7 +6,9 @@ namespace :pokemon do
     task :load do
       total = 0
 
-      Pokemon::Set.all.each do |set|
+      sets = Rails.env.test? ? Pokemon::Set.where(set_id: %w[sve sv4pt5]) : Pokemon::Set.all
+
+      sets.each do |set|
         Searchkick.callbacks(:bulk) do
           data_url = "https://github.com/PokemonTCG/pokemon-tcg-data/raw/master/cards/en/#{set.set_id}.json"
           data = URI.open(data_url)
