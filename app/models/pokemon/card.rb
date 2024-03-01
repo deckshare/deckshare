@@ -35,6 +35,9 @@ module Pokemon
 
     belongs_to :set, foreign_key: 'pokemon_set_id', inverse_of: :cards
 
+    has_many :user_cards, as: :card, class_name: 'User::Card', dependent: :delete_all
+    has_many :users, through: :user_cards
+
     default_scope -> { includes(:set) }
 
     scope :evolves_to,       ->(name)   { string_in_array(name, :evolves_to) }
