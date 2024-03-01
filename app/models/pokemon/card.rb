@@ -32,6 +32,8 @@ class Pokemon::Card < ApplicationRecord
 
   belongs_to :set, foreign_key: "pokemon_set_id", inverse_of: :cards
 
+  default_scope -> { includes(:set) }
+
   scope :evolves_to,       ->(name)   { string_in_array(name, :evolves_to) }
   scope :has_ability_name, ->(name)   { object_in_array({ name: }, :abilities) }
   scope :has_attack_name,  ->(name)   { object_in_array({ name: }, :attacks) }
@@ -39,8 +41,6 @@ class Pokemon::Card < ApplicationRecord
   scope :has_subtype,      ->(name)   { string_in_array(name, :subtypes) }
   scope :has_type,         ->(name)   { string_in_array(name, :types) }
   scope :has_weakness,     ->(type)   { object_in_array({ type: }, :weaknesses) }
-
-  scope :search_import, -> { includes(:set) }
 
   class << self
     def ability_names
@@ -81,6 +81,6 @@ class Pokemon::Card < ApplicationRecord
   end
 
   def to_s
-    "#{name} - #{set.name} #{number}"
+    "#{name} - #{set.name} #{number} / #{set.printed_total}"
   end
 end

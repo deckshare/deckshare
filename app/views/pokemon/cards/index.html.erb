@@ -1,7 +1,7 @@
 <div class="cards-page">
   <div class="cards-grid">
     <% @cards&.each do |card| %>
-      <div><%= link_to image_tag(card.images.small, alt: card), card %></div>
+      <div><%= link_to image_tag(card.images.small, alt: card, title: card), card %></div>
     <% end %>
   </div>
   <% if @pagy %>
