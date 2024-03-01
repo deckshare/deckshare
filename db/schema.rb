@@ -73,7 +73,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_01_230413) do
     t.uuid "user_id", null: false
     t.string "card_type", null: false
     t.uuid "card_id", null: false
-    t.integer "quantity"
+    t.integer "quantity", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["card_type", "card_id"], name: "index_user_cards_on_card"

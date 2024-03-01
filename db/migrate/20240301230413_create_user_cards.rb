@@ -3,7 +3,7 @@ class CreateUserCards < ActiveRecord::Migration[7.1]
     create_table :user_cards, id: :uuid do |t|
       t.references :user, null: false, foreign_key: true, type: :uuid
       t.references :card, null: false, polymorphic: true, type: :uuid
-      t.integer :quantity
+      t.integer :quantity, default: 0
 
       t.timestamps
     end
