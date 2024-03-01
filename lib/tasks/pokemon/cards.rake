@@ -1,9 +1,11 @@
+# frozen_string_literal: true
+
 require_relative '../../../config/environment'
 
 namespace :pokemon do
   namespace :cards do
-    desc "Load Pokémon card data"
-    task :load do
+    desc 'Load Pokémon card data'
+    task load: :environment do
       total = 0
 
       sets = Rails.env.test? ? Pokemon::Set.where(set_id: %w[sve sv4pt5]) : Pokemon::Set.all
@@ -12,7 +14,7 @@ namespace :pokemon do
         Searchkick.callbacks(:bulk) do
           data_url = "https://github.com/PokemonTCG/pokemon-tcg-data/raw/master/cards/en/#{set.set_id}.json"
           data = URI.open(data_url)
-          cards = JSON.load(data)
+          cards = JSON.parse(data)
 
           total += cards.count
           puts "Loading #{cards.count} cards for #{set.name}"

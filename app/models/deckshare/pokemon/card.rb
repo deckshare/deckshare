@@ -1,10 +1,16 @@
-class Deckshare::Pokemon::Card < ApplicationRecord
-  belongs_to :user
+# frozen_string_literal: true
 
-  validates :card_id, presence: :true
-  validates :quantity, numericality: { greater_than: 0 }
+module Deckshare
+  module Pokemon
+    class Card < ApplicationRecord
+      belongs_to :user
 
-  def card
-    @card ||= Pokemon::Card.find(card_id)
+      validates :card_id, presence: true
+      validates :quantity, numericality: { greater_than: 0 }
+
+      def card
+        @card ||= Pokemon::Card.find(card_id)
+      end
+    end
   end
 end

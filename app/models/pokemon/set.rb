@@ -1,11 +1,15 @@
-class Pokemon::Set < ApplicationRecord
-  extend Pagy::Searchkick
+# frozen_string_literal: true
 
-  searchkick
+module Pokemon
+  class Set < ApplicationRecord
+    extend Pagy::Searchkick
 
-  has_many :cards, foreign_key: "pokemon_set_id", inverse_of: :set
+    searchkick
 
-  def to_param
-    set_id
+    has_many :cards, foreign_key: 'pokemon_set_id', inverse_of: :set
+
+    def to_param
+      set_id
+    end
   end
 end

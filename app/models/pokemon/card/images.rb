@@ -1,6 +1,12 @@
-class Pokemon::Card::Images
-  include StoreModel::Model
+# frozen_string_literal: true
 
-  attribute :large, :string
-  attribute :small, :string
+module Pokemon
+  class Card
+    class Images
+      include StoreModel::Model
+
+      attribute :large, :string
+      attribute :small, :string
+    end
+  end
 end

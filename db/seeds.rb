@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # This file should ensure the existence of records required to run the application in every environment (production,
 # development, test). The code here should be idempotent so that it can be executed at any point in every environment.
 # The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
@@ -10,7 +12,7 @@
 
 database_name = ActiveRecord::Base.connection_db_config.configuration_hash[:database]
 
-filename = "pokemon#{".test" if Rails.env.test?}.sql.gz"
+filename = "pokemon#{'.test' if Rails.env.test?}.sql.gz"
 
 exec "gzcat #{Rails.root.join('db', 'data', filename)} | psql #{database_name}"
 

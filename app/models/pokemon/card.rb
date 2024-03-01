@@ -1,86 +1,90 @@
-class Pokemon::Card < ApplicationRecord
-  extend Pagy::Searchkick
+# frozen_string_literal: true
 
-  DEFAULT_SEARCH_FIELDS = %i[
-    name
-    supertype
-    subtypes
-    types
-    evolves_from
-    evolves_to
-    rules
-    ancient_trait
-    abilities.name
-    abilities.text
-    attacks.name
-    attacks.text
-    legalities
-    artist
-    rarity
-    set.name
-    set.series
-    set.legalities
-    set.ptcgo_code
-  ].freeze
+module Pokemon
+  class Card < ApplicationRecord
+    extend Pagy::Searchkick
 
-  searchkick
+    DEFAULT_SEARCH_FIELDS = %i[
+      name
+      supertype
+      subtypes
+      types
+      evolves_from
+      evolves_to
+      rules
+      ancient_trait
+      abilities.name
+      abilities.text
+      attacks.name
+      attacks.text
+      legalities
+      artist
+      rarity
+      set.name
+      set.series
+      set.legalities
+      set.ptcgo_code
+    ].freeze
 
-  attribute :abilities, Ability.to_array_type
-  attribute :attacks, Attack.to_array_type
-  attribute :images, Images.to_type
-  attribute :weaknesses, Weakness.to_array_type
+    searchkick
 
-  belongs_to :set, foreign_key: "pokemon_set_id", inverse_of: :cards
+    attribute :abilities, Ability.to_array_type
+    attribute :attacks, Attack.to_array_type
+    attribute :images, Images.to_type
+    attribute :weaknesses, Weakness.to_array_type
 
-  default_scope -> { includes(:set) }
+    belongs_to :set, foreign_key: 'pokemon_set_id', inverse_of: :cards
 
-  scope :evolves_to,       ->(name)   { string_in_array(name, :evolves_to) }
-  scope :has_ability_name, ->(name)   { object_in_array({ name: }, :abilities) }
-  scope :has_attack_name,  ->(name)   { object_in_array({ name: }, :attacks) }
-  scope :has_dex_number,   ->(number) { integer_in_array(number, :national_pokedex_numbers) }
-  scope :has_subtype,      ->(name)   { string_in_array(name, :subtypes) }
-  scope :has_type,         ->(name)   { string_in_array(name, :types) }
-  scope :has_weakness,     ->(type)   { object_in_array({ type: }, :weaknesses) }
+    default_scope -> { includes(:set) }
 
-  class << self
-    def ability_names
-      array_elements(:abilities, :name)
+    scope :evolves_to,       ->(name)   { string_in_array(name, :evolves_to) }
+    scope :has_ability_name, ->(name)   { object_in_array({ name: }, :abilities) }
+    scope :has_attack_name,  ->(name)   { object_in_array({ name: }, :attacks) }
+    scope :has_dex_number,   ->(number) { integer_in_array(number, :national_pokedex_numbers) }
+    scope :has_subtype,      ->(name)   { string_in_array(name, :subtypes) }
+    scope :has_type,         ->(name)   { string_in_array(name, :types) }
+    scope :has_weakness,     ->(type)   { object_in_array({ type: }, :weaknesses) }
+
+    class << self
+      def ability_names
+        array_elements(:abilities, :name)
+      end
+
+      def attack_names
+        array_elements(:attacks, :name)
+      end
+
+      def regulation_marks
+        pluck_distinct(:regulation_mark)
+      end
+
+      def subtypes
+        array_agg(:subtypes)
+      end
+
+      def supertypes
+        pluck_distinct(:supertype)
+      end
+
+      def types
+        array_agg(:types)
+      end
     end
 
-    def attack_names
-      array_elements(:attacks, :name)
+    def alternates
+      set.cards.where(name:).excluding(self)
     end
 
-    def regulation_marks
-      pluck_distinct(:regulation_mark)
+    def search_data
+      attributes.merge(set:)
     end
 
-    def subtypes
-      array_agg(:subtypes)
+    def to_param
+      card_id
     end
 
-    def supertypes
-      pluck_distinct(:supertype)
+    def to_s
+      "#{name} - #{set.name} #{number} / #{set.printed_total}"
     end
-
-    def types
-      array_agg(:types)
-    end
-  end
-
-  def alternates
-    set.cards.where(name:).excluding(self)
-  end
-
-  def search_data
-    attributes.merge(set:)
-  end
-
-  def to_param
-    card_id
-  end
-
-  def to_s
-    "#{name} - #{set.name} #{number} / #{set.printed_total}"
   end
 end

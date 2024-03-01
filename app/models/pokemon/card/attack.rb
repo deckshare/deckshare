@@ -1,15 +1,21 @@
-class Pokemon::Card::Attack
-  include StoreModel::Model
+# frozen_string_literal: true
 
-  attribute :cost, :array_of_strings
-  attribute :name, :string
-  attribute :text, :string
-  attribute :damage, :string
-  attribute :converted_energy_cost, :integer
+module Pokemon
+  class Card
+    class Attack
+      include StoreModel::Model
 
-  class << self
-    def names
-      Pokemon::Card.attack_names
+      attribute :cost, :array_of_strings
+      attribute :name, :string
+      attribute :text, :string
+      attribute :damage, :string
+      attribute :converted_energy_cost, :integer
+
+      class << self
+        def names
+          Pokemon::Card.attack_names
+        end
+      end
     end
   end
 end

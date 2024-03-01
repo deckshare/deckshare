@@ -1,12 +1,14 @@
+# frozen_string_literal: true
+
 require_relative '../../../config/environment'
 
 namespace :pokemon do
   namespace :sets do
-    desc "Load Pokémon set data"
-    task :load do
-      data_url = "https://github.com/PokemonTCG/pokemon-tcg-data/raw/master/sets/en.json"
+    desc 'Load Pokémon set data'
+    task load: :environment do
+      data_url = 'https://github.com/PokemonTCG/pokemon-tcg-data/raw/master/sets/en.json'
       data = URI.open(data_url)
-      sets = JSON.load(data)
+      sets = JSON.parse(data)
 
       Searchkick.callbacks(:bulk) do
         sets.map(&:with_indifferent_access).each do |set_data|

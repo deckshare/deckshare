@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 FactoryBot.define do
   factory :deckshare_pokemon_card, class: 'Deckshare::Pokemon::Card' do
     user
-    card_id { "xy1-1" }
+    card_id { 'xy1-1' }
     quantity { 1 }
   end
 end

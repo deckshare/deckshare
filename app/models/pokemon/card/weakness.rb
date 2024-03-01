@@ -1,6 +1,12 @@
-class Pokemon::Card::Weakness
-  include StoreModel::Model
+# frozen_string_literal: true
 
-  attribute :type, :string
-  attribute :value, :string
+module Pokemon
+  class Card
+    class Weakness
+      include StoreModel::Model
+
+      attribute :type, :string
+      attribute :value, :string
+    end
+  end
 end

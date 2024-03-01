@@ -1,12 +1,18 @@
+# frozen_string_literal: true
+
 class UsersController < ApplicationController
   include Authentication
 
   before_action :authenticate!, except: %i[new create]
   before_action :unauthenticate!, only: %i[new create]
 
+  def show; end
+
   def new
     @user = User.new
   end
+
+  def edit; end
 
   def create
     @user = User.new(create_params)
@@ -15,12 +21,6 @@ class UsersController < ApplicationController
     redirect_to action: :show
   rescue ActiveRecord::RecordInvalid
     render action: :new, status: :unprocessable_entity
-  end
-
-  def show
-  end
-
-  def edit
   end
 
   def update
