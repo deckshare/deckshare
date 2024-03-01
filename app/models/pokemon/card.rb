@@ -69,7 +69,7 @@ class Pokemon::Card < ApplicationRecord
   end
 
   def alternates
-    Card.where(name:, set_id:).excluding(self)
+    set.cards.where(name:).excluding(self)
   end
 
   def search_data
