@@ -9,7 +9,7 @@ class ApplicationRecord < ActiveRecord::Base
     protected
 
     def array_agg(column, sort: :asc)
-      joins("CROSS JOIN unnest(#{column}) AS elem WHERE elem IS NOT NULL")
+      joins("CROSS JOIN unnest(#{column}) AS elem")
         .pluck(Arel.sql("array_agg(DISTINCT elem ORDER BY elem #{sort.upcase})"))
         .flatten
     end
