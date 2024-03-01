@@ -11,7 +11,7 @@ class User < ApplicationRecord
 
   validates :username, presence: true, uniqueness: { case_sensitive: false }
 
-  has_many :pokemon_cards, class_name: 'Deckshare::Pokemon::Card'
+  has_many :pokemon_cards, class_name: 'Deckshare::Pokemon::Card', dependent: :destroy_async
 
   class << self
     def find_and_authenticate_by!(email:, password:)

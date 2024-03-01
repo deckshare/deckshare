@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class CreateDecksharePokemonCards < ActiveRecord::Migration[7.1]
   def change
     create_table :deckshare_pokemon_cards, id: :uuid do |t|
@@ -9,6 +7,6 @@ class CreateDecksharePokemonCards < ActiveRecord::Migration[7.1]
 
       t.timestamps
     end
-    add_index :deckshare_pokemon_cards, %i[user_id card_id], unique: true
+    add_index :deckshare_pokemon_cards, [:user_id, :card_id], unique: true
   end
 end

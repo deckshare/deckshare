@@ -17,10 +17,14 @@ require:
 
 AllCops:
   NewCops: enable
-
-Metrics/MethodLength:
   Exclude:
-    - db/**/*.rb
+    - bin/*
+    - db/migrate/*.rb
+    - db/schema.rb
+
+Metrics/BlockLength:
+  Exclude:
+    - config/environments/**.rb
 
 RSpec/ExampleLength:
   Enabled: false
