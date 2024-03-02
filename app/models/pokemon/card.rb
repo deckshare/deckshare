@@ -30,6 +30,7 @@ module Pokemon
     attribute :abilities, Ability.to_array_type
     attribute :attacks, Attack.to_array_type
     attribute :images, Images.to_type
+    attribute :legalities, Legalities.to_type
     attribute :weaknesses, Weakness.to_array_type
 
     belongs_to :set, foreign_key: 'pokemon_set_id', inverse_of: :cards
