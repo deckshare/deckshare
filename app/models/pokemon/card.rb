@@ -38,7 +38,7 @@ module Pokemon
     has_many :user_cards, as: :card, class_name: 'User::Card', dependent: :delete_all
     has_many :users, through: :user_cards
 
-    default_scope -> { includes(:set) }
+    default_scope -> { readonly.includes(:set) }
 
     scope :evolves_to,       ->(name)   { string_in_array(name, :evolves_to) }
     scope :has_ability_name, ->(name)   { object_in_array({ name: }, :abilities) }

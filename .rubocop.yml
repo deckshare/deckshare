@@ -27,11 +27,21 @@ Metrics/BlockLength:
   Exclude:
     - config/environments/**.rb
 
+Rails/SkipsModelValidations:
+  Exclude:
+    - lib/tasks/pokemon/cards.rake
+    - lib/tasks/pokemon/sets.rake
+
 RSpec/ExampleLength:
   Enabled: false
 
 RSpec/ImplicitSubject:
   Enabled: false
+
+Security/JSONLoad:
+  Exclude:
+    - lib/tasks/pokemon/cards.rake
+    - lib/tasks/pokemon/sets.rake
 
 Security/Open:
   Exclude:
