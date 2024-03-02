@@ -40,11 +40,13 @@ RSpec.describe User do
   describe '#remove_card!' do
     subject(:remove_card!) { user.remove_card!(card:, quantity:) }
 
-    let(:card) { Pokemon::Card.find_by(card_id: 'sv4pt5-59') }
+    let(:card) { owned_card }
+    let(:owned_card) { Pokemon::Card.find_by(card_id: 'sv4pt5-59') }
+
     let(:initial_quantity) { 2 }
     let(:quantity) { 1 }
 
-    before { create(:user_card, user:, card:, quantity: initial_quantity) }
+    before { create(:user_card, user:, card: owned_card, quantity: initial_quantity) }
 
     context 'with a quantity between 1 and card.quantity' do
       it { expect { remove_card! }.to change { user.cards.find_by(card:).quantity }.from(2).to(1) }
@@ -72,6 +74,12 @@ RSpec.describe User do
       let(:quantity) { 0 }
 
       it { expect { remove_card! }.to raise_error(RangeError, '0 not in range 1..2') }
+    end
+
+    context 'with an unowned card' do
+      let(:card) { Pokemon::Card.find_by(card_id: 'sv4pt5-231') }
+
+      it { expect { remove_card! }.to raise_error(ActiveRecord::RecordNotFound) }
     end
   end
 end
