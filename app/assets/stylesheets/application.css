@@ -3,4 +3,5 @@ i {
   width: 1em;
   aspect-ratio: 1;
   background-size: cover;
+  vertical-align: top;
 }
