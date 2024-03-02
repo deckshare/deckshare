@@ -3,9 +3,12 @@
 module Pokemon
   class CardsController < ApplicationController
     def index
-      return unless params[:q]
+      @query = Pokemon::Card::Query.new(params[:q])
 
-      cards = Pokemon::Card.pagy_search(params[:q], fields: Pokemon::Card::DEFAULT_SEARCH_FIELDS)
+      cards = @query.search
+
+      return unless cards
+
       @pagy, @cards = pagy_searchkick(cards)
     end
 
