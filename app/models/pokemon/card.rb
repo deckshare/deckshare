@@ -2,7 +2,8 @@
 
 module Pokemon
   class Card < ApplicationRecord
-    extend Pagy::Searchkick
+    include Readonly
+    include Searchable
 
     DEFAULT_SEARCH_FIELDS = %i[
       name
@@ -26,8 +27,6 @@ module Pokemon
       set.ptcgo_code
     ].freeze
 
-    searchkick
-
     attribute :abilities, Ability.to_array_type
     attribute :attacks, Attack.to_array_type
     attribute :images, Images.to_type
@@ -38,7 +37,7 @@ module Pokemon
     has_many :user_cards, as: :card, class_name: 'User::Card', dependent: :delete_all
     has_many :users, through: :user_cards
 
-    default_scope -> { readonly.includes(:set) }
+    default_scope -> { includes(:set) }
 
     scope :evolves_to,       ->(name)   { string_in_array(name, :evolves_to) }
     scope :has_ability_name, ->(name)   { object_in_array({ name: }, :abilities) }
