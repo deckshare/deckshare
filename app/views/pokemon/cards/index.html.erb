@@ -1,8 +1,5 @@
 <div class="cards-page">
-  <%= form_tag(pokemon_cards_url, method: :get) do %>
-    <%= search_field_tag(:q, params[:q]) %>
-    <%= submit_tag("Search") %>
-  <% end %>
+  <%= render "search" %>
 
   <div class="cards-grid">
     <% @cards&.each do |card| %>

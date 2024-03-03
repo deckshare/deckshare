@@ -1,0 +1,4 @@
+  <%= form_tag(pokemon_cards_url, method: :get) do %>
+    <%= search_field_tag(:q, params[:q]) %>
+    <%= submit_tag("Search") %>
+  <% end %>
