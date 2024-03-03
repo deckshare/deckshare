@@ -82,4 +82,10 @@ RSpec.describe User do
       it { expect { remove_card! }.to raise_error(ActiveRecord::RecordNotFound) }
     end
   end
+
+  describe '#to_s' do
+    subject(:_to_s) { user.to_s }
+
+    it { is_expected.to eq(user.username) }
+  end
 end

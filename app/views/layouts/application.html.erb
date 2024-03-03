@@ -13,13 +13,18 @@
   </head>
 
   <body>
-    <header>
-      <div><%= link_to("Deckshare", root_url) %></div>
-      <div>
-        <%= current_user? ? link_to("Log out", session_path, data: { turbo_method: :delete }) : link_to("Log in", new_session_path) %>
+    <header class="page-header">
+      <h1 class="home-link"><%= link_to("Deckshare", root_url) %></h1>
+      <div class="user-menu">
+        <% if current_user? %>
+          <%= link_to(current_user, user_path) %>
+          <%= link_to("Log out", session_path, "data-turbo-method": :delete) %>
+        <% else %>
+          <%= link_to("Log in", new_session_path) %>
+        <% end %>
       </div>
     </header>
-    <main class="container mx-auto mt-28 px-5 flex">
+    <main class="page-container">
       <%= yield %>
     </main>
   </body>

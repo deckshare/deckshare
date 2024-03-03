@@ -47,4 +47,8 @@ class User < ApplicationRecord
       raise RangeError, "#{quantity} not in range 1..#{card.quantity}"
     end
   end
+
+  def to_s
+    username
+  end
 end

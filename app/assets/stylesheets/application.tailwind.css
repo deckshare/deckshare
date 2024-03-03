@@ -4,3 +4,21 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+  header.page-header {
+    @apply bg-slate-400 p-4 flex justify-between;
+  }
+
+  .home-link {
+    @apply text-2xl;
+  }
+
+  .user-menu {
+    @apply flex gap-4;
+  }
+
+  main.page-container {
+    @apply container mx-auto mt-14 px-5 flex;
+  }
+}
