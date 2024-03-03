@@ -82,6 +82,10 @@ module Pokemon
       attributes.merge(set:)
     end
 
+    def similar_cards
+      similar(fields: DEFAULT_SEARCH_FIELDS)
+    end
+
     def to_param
       card_id
     end

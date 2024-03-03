@@ -3,7 +3,7 @@
 module Pokemon
   class CardsController < ApplicationController
     def index
-      @query = Pokemon::Card::Query.new(params[:q])
+      @query = Card::Query.new(params[:q])
 
       cards = @query.search
 
@@ -13,7 +13,7 @@ module Pokemon
     end
 
     def show
-      @card = Pokemon::Card.find_by!(card_id: params[:id])
+      @card = Card.find_by!(card_id: params[:id])
     end
   end
 end
