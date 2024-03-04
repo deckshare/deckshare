@@ -10,9 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_03_01_230413) do
+ActiveRecord::Schema[7.1].define(version: 2024_03_04_212054) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "decks", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "name"
+    t.string "deck_type"
+    t.uuid "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["deck_type"], name: "index_decks_on_deck_type"
+    t.index ["name"], name: "index_decks_on_name"
+    t.index ["user_id"], name: "index_decks_on_user_id"
+  end
 
   create_table "pokemon_cards", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "card_id"
@@ -94,6 +105,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_01_230413) do
     t.index ["username"], name: "index_users_on_username", unique: true
   end
 
+  add_foreign_key "decks", "users"
   add_foreign_key "pokemon_cards", "pokemon_sets"
   add_foreign_key "user_cards", "users"
 end

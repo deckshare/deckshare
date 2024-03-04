@@ -14,6 +14,8 @@ class User < ApplicationRecord
   has_many :cards, dependent: :destroy_async
   has_many :pokemon_cards, through: :cards, source: :card, source_type: 'Pokemon::Card'
 
+  has_many :decks, dependent: :destroy_async
+
   class << self
     def find_and_authenticate_by!(email:, password:)
       find_by!(email:).authenticate!(password)
