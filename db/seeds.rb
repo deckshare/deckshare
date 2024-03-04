@@ -14,7 +14,7 @@ database_name = ActiveRecord::Base.connection_db_config.configuration_hash[:data
 
 filename = "pokemon#{'.test' if Rails.env.test?}.sql.gz"
 
-exec "gzcat #{Rails.root.join('db', 'data', filename)} | psql #{database_name}"
+`gzcat #{Rails.root.join('db', 'data', filename)} | psql #{database_name}`
 
-Pokemon::Card.reindex
 Pokemon::Set.reindex
+Pokemon::Card.reindex
