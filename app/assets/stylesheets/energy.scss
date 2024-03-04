@@ -1,0 +1,47 @@
+i.energy {
+  background-image: url("energy.png");
+
+  &.colorless {
+    background-position-y: calc(100% * 0);
+  }
+
+  &.darkness {
+    background-position-y: calc(100% * -1);
+  }
+
+  &.dragon {
+    background-position-y: calc(100% * -2);
+  }
+
+  &.fairy {
+    background-position-y: calc(100% * -3);
+  }
+
+  &.fighting {
+    background-position-y: calc(100% * -4);
+  }
+
+  &.fire {
+    background-position-y: calc(100% * -5);
+  }
+
+  &.grass {
+    background-position-y: calc(100% * -6);
+  }
+
+  &.lightning {
+    background-position-y: calc(100% * -7);
+  }
+
+  &.metal {
+    background-position-y: calc(100% * -8);
+  }
+
+  &.psychic {
+    background-position-y: calc(100% * -9);
+  }
+
+  &.water {
+    background-position-y: calc(100% * -10);
+  }
+}

@@ -5,7 +5,7 @@
       "request": "launch",
       "name": "Rails server",
       "program": "bin/rails server",
-      "preLaunchTask": "rails tailwindcss:watch",
+      "preLaunchTask": "rails dartsass:watch",
       "env": {
         "RUBY_DEBUG_OPEN": "true"
       }

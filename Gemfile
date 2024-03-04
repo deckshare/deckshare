@@ -24,9 +24,6 @@ gem 'turbo-rails'
 # Hotwire's modest JavaScript framework [https://stimulus.hotwired.dev]
 gem 'stimulus-rails'
 
-# Use Tailwind CSS [https://github.com/rails/tailwindcss-rails]
-gem 'tailwindcss-rails'
-
 # Build JSON APIs with ease [https://github.com/rails/jbuilder]
 gem 'jbuilder'
 
@@ -85,3 +82,7 @@ gem 'opensearch-ruby', '~> 3.1'
 gem 'searchkick', '~> 5.3'
 
 gem 'pagy', '~> 7.0'
+
+gem 'bootstrap', github: 'twbs/bootstrap-rubygem'
+
+gem 'dartsass-rails', '~> 0.5.0'

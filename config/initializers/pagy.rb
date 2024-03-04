@@ -124,7 +124,7 @@ Searchkick.extend Pagy::Searchkick
 
 # Bootstrap extra: Add nav, nav_js and combo_nav_js helpers and templates for Bootstrap pagination
 # See https://ddnexus.github.io/pagy/docs/extras/bootstrap
-# require 'pagy/extras/bootstrap'
+require 'pagy/extras/bootstrap'
 
 # Bulma extra: Add nav, nav_js and combo_nav_js helpers and templates for Bulma pagination
 # See https://ddnexus.github.io/pagy/docs/extras/bulma
@@ -143,7 +143,7 @@ Searchkick.extend Pagy::Searchkick
 # Notice: the other frontend extras add their own framework-styled versions,
 # so require this extra only if you need the unstyled version
 # See https://ddnexus.github.io/pagy/docs/extras/navs
-require 'pagy/extras/navs'
+# require 'pagy/extras/navs'
 
 # Semantic extra: Add nav, nav_js and combo_nav_js helpers for Semantic UI pagination
 # See https://ddnexus.github.io/pagy/docs/extras/semantic

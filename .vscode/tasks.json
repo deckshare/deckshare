@@ -23,9 +23,9 @@
       "problemMatcher": []
     },
     {
-      "label": "rails tailwindcss:watch",
+      "label": "rails dartsass:watch",
       "type": "shell",
-      "command": "bin/rails tailwindcss:watch",
+      "command": "bin/rails dartsass:watch",
       "isBackground": true,
       "problemMatcher": []
     }
