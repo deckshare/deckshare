@@ -1,14 +1,15 @@
-<div class="cards-page">
-  <%= render "search" %>
+<%= render "search" %>
 
-  <div class="cards-grid">
+<div class="my-4">
+  <div class="row row-cols-lg-5 g-4">
     <% @cards&.each do |card| %>
-      <div><%= link_to image_tag(card.images.small, alt: card, title: card), card %></div>
+      <div class="col"><%= link_to image_tag(card.images.small, alt: card, title: card, class: "img-fluid"), card %></div>
     <% end %>
   </div>
-  <% if @pagy %>
-    <div data-controller="pagy-initializer">
-      <%== pagy_bootstrap_nav_js(@pagy) %>
-    </div>
-  <% end %>
 </div>
+
+<% if @pagy %>
+  <div data-controller="pagy-initializer">
+    <%== pagy_bootstrap_nav_js(@pagy) %>
+  </div>
+<% end %>
