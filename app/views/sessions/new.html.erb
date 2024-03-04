@@ -1,9 +1,9 @@
-<div>
-  <h1 class="font-bold text-4xl">Sessions#new</h1>
-  <p>Find me in app/views/sessions/new.html.erb</p>
-  <%= form_for @session, url: session_url do |f| %>
-    <%= f.email_field :email %>
-    <%= f.password_field :password %>
-    <%= f.submit %>
+<div class="row justify-content-center">
+  <%= form_for(@session, url: session_url, html: { class: "col col-md-4" }) do |f| %>
+    <div class="row gap-4">
+      <%= f.email_field(:email, class: "form-control col-12", placeholder: "Email address") %>
+      <%= f.password_field(:password, class: "form-control col-12", placeholder: "Password") %>
+      <%= f.button("Log in", class: "btn btn-primary col-6") %>
+    </div>
   <% end %>
 </div>

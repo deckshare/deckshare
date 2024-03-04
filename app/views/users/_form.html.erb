@@ -1,7 +1,9 @@
-<%= form_for @user, url: user_url do |f| %>
-  <%= f.text_field :username, required: true %>
-  <%= f.email_field :email, required: true %>
-  <%= f.password_field :password, required: true %>
-  <%= f.password_field :password_confirmation, required: true %>
-  <%= f.submit %>
+<%= form_for(@user, url: user_url, html: { class: "col col-md-4" }) do |f| %>
+  <div class="row gap-4 align-content-center">
+    <%= f.text_field(:username, required: true, class: "form-control col-12", placeholder: "Username") %>
+    <%= f.email_field(:email, required: true, class: "form-control col-12", placeholder: "Email address") %>
+    <%= f.password_field(:password, required: true, class: "form-control col-12", placeholder: "Password") %>
+    <%= f.password_field(:password_confirmation, required: true, class: "form-control col-12", placeholder: "Confirm password") %>
+    <%= f.button("Sign up", class: "btn btn-primary col-6") %>
+  </div>
 <% end %>
