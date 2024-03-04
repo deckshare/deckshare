@@ -79,7 +79,7 @@ group :test do
   gem 'selenium-webdriver'
 end
 
-gem 'store_model', '~> 2.2'
+gem 'store_model', '~> 2.3'
 
 gem 'opensearch-ruby', '~> 3.1'
 gem 'searchkick', '~> 5.3'
