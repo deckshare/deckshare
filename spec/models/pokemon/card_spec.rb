@@ -348,8 +348,8 @@ RSpec.describe Pokemon::Card do
 
     let(:card_id) { 'sv4pt5-59' }
 
-    describe '#alternates' do
-      subject(:_alternates) { card.alternates.pluck(:card_id) }
+    describe '#printings' do
+      subject(:_printings) { card.printings.pluck(:card_id) }
 
       it { is_expected.to contain_exactly('sv4pt5-219') }
     end
