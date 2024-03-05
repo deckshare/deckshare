@@ -38,8 +38,6 @@ module Pokemon
     has_many :user_cards, as: :card, class_name: 'User::Card', dependent: :delete_all
     has_many :users, through: :user_cards
 
-    default_scope -> { includes(:set) }
-
     scope :evolves_to,        ->(name)   { string_in_array(:evolves_to, name) }
     scope :has_ability_names, ->(*names) { object_in_array(:abilities, *names.map { |name| { name: } }) }
     scope :has_attack_names,  ->(*names) { object_in_array(:attacks, *names.map { |name| { name: } }) }
@@ -47,6 +45,8 @@ module Pokemon
     scope :has_subtype,       ->(name)   { string_in_array(:subtypes, name) }
     scope :has_type,          ->(name)   { string_in_array(:types, name) }
     scope :has_weakness,      ->(type)   { object_in_array(:weaknesses, { type: }) }
+
+    scope :search_import, -> { includes(:set) }
 
     class << self
       def ability_names

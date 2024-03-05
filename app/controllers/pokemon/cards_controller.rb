@@ -5,7 +5,7 @@ module Pokemon
     def index
       @query = Card::Query.new(params[:q])
 
-      cards = @query.search
+      cards = @query.search&.includes(:set)
 
       return unless cards
 
@@ -13,7 +13,7 @@ module Pokemon
     end
 
     def show
-      @card = Card.find_by!(card_id: params[:id])
+      @card = Card.includes(:set).find_by!(card_id: params[:id])
     end
   end
 end
