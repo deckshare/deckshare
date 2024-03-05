@@ -14,75 +14,9 @@ RSpec.describe User do
   end
 
   describe '#cards' do
-    let(:card) { Pokemon::Card.find_by(card_id: 'sv4pt5-59') }
-    let(:quantity) { 1 }
+    subject(:collection) { user }
 
-    describe '.add!' do
-      subject(:add!) { user.cards.add!(card, quantity:) }
-
-      context 'with a new card' do
-        it { expect { add! }.to change { user.cards.exists?(card:) }.from(false).to(true) }
-        it { expect { add! }.to change { user.cards.find_by(card:)&.quantity }.from(nil).to(1) }
-      end
-
-      context 'with an existing card' do
-        before { create(:card, collection: user, card:, quantity:) }
-
-        it { expect { add! }.to change { user.cards.find_by(card:).quantity }.from(1).to(2) }
-      end
-
-      context 'with an invalid quantity' do
-        let(:quantity) { 0 }
-
-        it { expect { add! }.to raise_error(RangeError, '0 not greater than 0') }
-      end
-    end
-
-    describe '#remove!' do
-      subject(:remove!) { user.cards.remove!(card, quantity:) }
-
-      let(:card) { owned_card }
-      let(:owned_card) { Pokemon::Card.find_by(card_id: 'sv4pt5-59') }
-
-      let(:initial_quantity) { 2 }
-      let(:quantity) { 1 }
-
-      before { create(:card, collection: user, card: owned_card, quantity: initial_quantity) }
-
-      context 'with a quantity between 1 and card.quantity' do
-        it { expect { remove! }.to change { user.cards.find_by(card:).quantity }.from(2).to(1) }
-      end
-
-      context 'with a quantity equal to card.quantity and greater than 1' do
-        let(:quantity) { 2 }
-
-        it { expect { remove! }.to change { user.cards.exists?(card:) }.from(true).to(false) }
-      end
-
-      context 'with a quantity and card.quantity equal to 1' do
-        let(:initial_quantity) { 1 }
-
-        it { expect { remove! }.to change { user.cards.exists?(card:) }.from(true).to(false) }
-      end
-
-      context 'with a quantity greater than card.quantity' do
-        let(:quantity) { 3 }
-
-        it { expect { remove! }.to raise_error(RangeError, '3 not in range 1..2') }
-      end
-
-      context 'with a quantity of 0' do
-        let(:quantity) { 0 }
-
-        it { expect { remove! }.to raise_error(RangeError, '0 not in range 1..2') }
-      end
-
-      context 'with an unowned card' do
-        let(:card) { Pokemon::Card.find_by(card_id: 'sv4pt5-231') }
-
-        it { expect { remove! }.to raise_error(ActiveRecord::RecordNotFound) }
-      end
-    end
+    it_behaves_like 'a collection of cards'
   end
 
   describe '#to_s' do

@@ -7,8 +7,6 @@ class Deck < ApplicationRecord
 
   before_validation :default_name
 
-  validates_associated :cards
-
   scope :pokemon, -> { where(type: 'Pokemon::Deck') }
 
   private

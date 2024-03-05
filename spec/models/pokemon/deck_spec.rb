@@ -2,8 +2,8 @@
 
 require 'rails_helper'
 
-RSpec.describe Deck do
-  subject(:deck) { build(:deck) }
+RSpec.describe Pokemon::Deck do
+  subject(:deck) { build(:pokemon_deck) }
 
   it { is_expected.to be_valid }
 
@@ -15,5 +15,11 @@ RSpec.describe Deck do
 
     it { is_expected.to be_valid }
     it { is_expected.to have_attributes(name: 'Untitled Deck 1') }
+  end
+
+  describe '#cards' do
+    subject(:collection) { deck }
+
+    it_behaves_like 'a collection of cards'
   end
 end

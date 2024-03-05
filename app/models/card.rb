@@ -11,13 +11,14 @@ class Card < ApplicationRecord
 
   validate :card_collection_type_match
 
+  scope :pokemon, -> { where(card_type: 'Pokemon::Card') }
+
   private
 
   def card_collection_type_match
     return if collection.is_a?(User)
-    return if collection.class.module_parent_name == card.class.module_parent_name
+    return if card.is_a?(collection.class.card_type)
 
-    errors.add(:card,
-               'mismatched card type for collection type')
+    errors.add(:card, 'mismatched card type for collection type')
   end
 end
