@@ -10,9 +10,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_03_04_212054) do
+ActiveRecord::Schema[7.1].define(version: 2024_03_05_033232) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "cards", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "collection_type", null: false
+    t.uuid "collection_id", null: false
+    t.string "card_type", null: false
+    t.uuid "card_id", null: false
+    t.integer "quantity"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["card_type", "card_id"], name: "index_cards_on_card"
+    t.index ["collection_type", "collection_id", "card_type", "card_id"], name: "idx_on_collection_type_collection_id_card_type_card_f44d838683", unique: true
+    t.index ["collection_type", "collection_id"], name: "index_cards_on_collection"
+  end
 
   create_table "decks", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "name"
