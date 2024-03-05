@@ -12,6 +12,11 @@
   </div>
 </div>
 <div class="row my-4 gx-2">
+  <% @card.alternates.each do |card| %>
+   <div class="col"><%= link_to image_tag(card.images.small, alt: card, title: card, class: "img-fluid"), card %></div>
+  <% end %>
+</div>
+<div class="row my-4 gx-2">
   <% @card.similar_cards.each do |card| %>
    <div class="col"><%= link_to image_tag(card.images.small, alt: card, title: card, class: "img-fluid"), card %></div>
   <% end %>
