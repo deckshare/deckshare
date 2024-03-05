@@ -93,18 +93,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_05_033232) do
     t.index ["set_id"], name: "index_pokemon_sets_on_set_id", unique: true
   end
 
-  create_table "user_cards", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.uuid "user_id", null: false
-    t.string "card_type", null: false
-    t.uuid "card_id", null: false
-    t.integer "quantity", default: 0
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["card_type", "card_id"], name: "index_user_cards_on_card"
-    t.index ["user_id", "card_type", "card_id"], name: "index_user_cards_on_user_id_and_card_type_and_card_id", unique: true
-    t.index ["user_id"], name: "index_user_cards_on_user_id"
-  end
-
   create_table "users", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "username"
     t.string "email"
@@ -120,5 +108,4 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_05_033232) do
 
   add_foreign_key "decks", "users"
   add_foreign_key "pokemon_cards", "pokemon_sets"
-  add_foreign_key "user_cards", "users"
 end

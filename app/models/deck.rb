@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
 class Deck < ApplicationRecord
-  belongs_to :user
+  include Collection
 
-  has_many :cards, as: :collection, dependent: :destroy_async
+  belongs_to :user
 
   before_validation :default_name
 

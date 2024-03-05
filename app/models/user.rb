@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class User < ApplicationRecord
+  include Collection
+
   has_secure_token :confirmation_token
   has_secure_password
 
@@ -10,9 +12,6 @@ class User < ApplicationRecord
             uniqueness: { case_sensitive: false }
 
   validates :username, presence: true, uniqueness: { case_sensitive: false }
-
-  has_many :cards, dependent: :destroy_async
-  has_many :pokemon_cards, through: :cards, source: :card, source_type: 'Pokemon::Card'
 
   has_many :decks, dependent: :destroy_async
 
@@ -26,28 +25,6 @@ class User < ApplicationRecord
 
   def authenticate!(password)
     authenticate(password) or raise Deckshare::Errors::AuthenticationError
-  end
-
-  def add_card!(card:, quantity: 1)
-    raise RangeError, "#{quantity} not greater than 0" unless quantity.positive?
-
-    card = cards.find_or_initialize_by(card:)
-    card.quantity += quantity
-    card.save!
-  end
-
-  def remove_card!(card:, quantity: 1)
-    card = cards.find_by!(card:)
-
-    case quantity
-    when card.quantity
-      card.destroy!
-    when 1...card.quantity
-      card.quantity -= quantity
-      card.save!
-    else
-      raise RangeError, "#{quantity} not in range 1..#{card.quantity}"
-    end
   end
 
   def to_s

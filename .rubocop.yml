@@ -38,6 +38,9 @@ RSpec/ExampleLength:
 RSpec/ImplicitSubject:
   Enabled: false
 
+RSpec/NestedGroups:
+  Enabled: false
+
 Security/JSONLoad:
   Exclude:
     - lib/tasks/pokemon/cards.rake
