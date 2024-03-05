@@ -74,8 +74,8 @@ module Pokemon
       end
     end
 
-    def alternates # rubocop:disable Metrics/AbcSize
-      query = Pokemon::Card.where(name:, supertype:, subtypes:, level:, hp:, types:)
+    def printings
+      query = Pokemon::Card.where(name:, supertype:, level:, hp:)
 
       query = query.has_attack_names(*attacks.map(&:name)) if attacks.present?
       query = query.has_ability_names(*abilities.map(&:name)) if abilities.present?
