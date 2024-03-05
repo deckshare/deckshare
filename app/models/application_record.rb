@@ -3,9 +3,9 @@
 class ApplicationRecord < ActiveRecord::Base
   primary_abstract_class
 
-  scope :integer_in_array, ->(value, column) { where("#{value} = ANY (#{column})") }
-  scope :string_in_array,  ->(value, column) { where("'#{value}' = ANY (#{column})") }
-  scope :object_in_array,  ->(value, column) { where("#{column} @> '[#{value.to_json}]'") }
+  scope :integer_in_array, ->(column, value)   { where("#{value} = ANY (#{column})") }
+  scope :string_in_array,  ->(column, value)   { where("'#{value}' = ANY (#{column})") }
+  scope :object_in_array,  ->(column, *values) { where("#{column} @> '[#{values.map(&:to_json).join(',')}]'") }
 
   class << self
     protected

@@ -40,13 +40,13 @@ module Pokemon
 
     default_scope -> { includes(:set) }
 
-    scope :evolves_to,       ->(name)   { string_in_array(name, :evolves_to) }
-    scope :has_ability_name, ->(name)   { object_in_array({ name: }, :abilities) }
-    scope :has_attack_name,  ->(name)   { object_in_array({ name: }, :attacks) }
-    scope :has_dex_number,   ->(number) { integer_in_array(number, :national_pokedex_numbers) }
-    scope :has_subtype,      ->(name)   { string_in_array(name, :subtypes) }
-    scope :has_type,         ->(name)   { string_in_array(name, :types) }
-    scope :has_weakness,     ->(type)   { object_in_array({ type: }, :weaknesses) }
+    scope :evolves_to,        ->(name)   { string_in_array(:evolves_to, name) }
+    scope :has_ability_names, ->(*names) { object_in_array(:abilities, *names.map { |name| { name: } }) }
+    scope :has_attack_names,  ->(*names) { object_in_array(:attacks, *names.map { |name| { name: } }) }
+    scope :has_dex_number,    ->(number) { integer_in_array(:national_pokedex_numbers, number) }
+    scope :has_subtype,       ->(name)   { string_in_array(:subtypes, name) }
+    scope :has_type,          ->(name)   { string_in_array(:types, name) }
+    scope :has_weakness,      ->(type)   { object_in_array(:weaknesses, { type: }) }
 
     class << self
       def ability_names
@@ -74,8 +74,13 @@ module Pokemon
       end
     end
 
-    def alternates
-      set.cards.where(name:).excluding(self)
+    def alternates # rubocop:disable Metrics/AbcSize
+      query = Pokemon::Card.where(name:, supertype:, subtypes:, hp:, types:)
+
+      query = query.has_attack_names(*attacks.map(&:name)) if attacks.present?
+      query = query.has_ability_names(*abilities.map(&:name)) if abilities.present?
+
+      query.excluding(self)
     end
 
     def search_data
