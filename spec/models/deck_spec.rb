@@ -16,10 +16,4 @@ RSpec.describe Deck do
     it { is_expected.to be_valid }
     it { is_expected.to have_attributes(name: 'Untitled Deck 1') }
   end
-
-  context 'without a deck type' do
-    before { deck.deck_type = nil }
-
-    it { is_expected.not_to be_valid }
-  end
 end

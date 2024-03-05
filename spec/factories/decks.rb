@@ -3,7 +3,7 @@
 FactoryBot.define do
   factory :deck do
     name { Faker::App.name }
-    deck_type { Deck::DECK_TYPE_POKEMON }
+    type { 'Pokemon::Deck' }
     user
   end
 end
