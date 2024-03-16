@@ -3,8 +3,8 @@
 class SessionsController < ApplicationController
   include Authentication
 
-  before_action :authenticate!, only: :destroy
-  before_action :unauthenticate!, only: %i[new create]
+  before_action :authenticate_user!, only: :destroy
+  before_action :unauthenticate_user!, only: %i[new create]
 
   def new
     @session = Session.new

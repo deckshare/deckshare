@@ -1,11 +1,13 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
-RSpec.describe "Collections", type: :request do
-  describe "GET /show" do
-    it "returns http success" do
-      get "/collections/show"
-      expect(response).to have_http_status(:success)
+RSpec.describe 'Collections' do
+  let(:user) { create(:user) }
+
+  describe 'GET /' do
+    it_behaves_like 'an authenticated route' do
+      let(:request) { get '/collection' }
     end
   end
-
 end

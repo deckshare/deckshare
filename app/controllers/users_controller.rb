@@ -3,8 +3,8 @@
 class UsersController < ApplicationController
   include Authentication
 
-  before_action :authenticate!, except: %i[new create]
-  before_action :unauthenticate!, only: %i[new create]
+  before_action :authenticate_user!, except: %i[new create]
+  before_action :unauthenticate_user!, only: %i[new create]
 
   def show; end
 
