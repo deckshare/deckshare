@@ -1,0 +1,20 @@
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Set</th>
+      <th>Number</th>
+      <th>Quantity</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @cards.each do |card| %>
+      <tr>
+        <td><%= link_to card.card.name, card.card %></td>
+        <td><%= card.card.set.name %></td>
+        <td><%= card.card.number %>/<%= card.card.set.printed_total %></td>
+        <td><%= card.quantity %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

@@ -24,6 +24,7 @@
               <li class="nav-item dropdown">
                 <%= link_to(current_user, "#", class: "nav-link dropdown-toggle", role: "button", "data-bs-toggle": "dropdown", "aria-expanded": "false") %>
                 <ul class="dropdown-menu dropdown-menu-end">
+                  <li><%= link_to("My Collection", collection_path, class: "dropdown-item") %></li>
                   <li><%= link_to("Settings", user_path, class: "dropdown-item") %></li>
                   <li><%= link_to("Log out", session_path, class: "dropdown-item", "data-turbo-method": :delete) %></li>
                 </ul>
