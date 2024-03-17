@@ -88,7 +88,7 @@ module Pokemon
     end
 
     def similar_cards
-      similar(fields: DEFAULT_SEARCH_FIELDS)
+      similar(fields: DEFAULT_SEARCH_FIELDS).includes(:set)
     end
 
     def to_param
