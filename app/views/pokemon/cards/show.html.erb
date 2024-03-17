@@ -1,6 +1,6 @@
 <div class="row my-4">
   <div class="col col-md-3">
-    <%= image_tag(@card.images.large, alt: @card, title: @card, class: "img-fluid") %>
+    <%= card_image(@card) %>
   </div>
   <div class="col">
     <h1 class="font-bold text-4xl">
@@ -13,11 +13,11 @@
 </div>
 <div class="row my-4 gx-2">
   <% @card.printings.each do |card| %>
-   <div class="col"><%= link_to image_tag(card.images.small, alt: card, title: card, class: "img-fluid"), card %></div>
+   <div class="col"><%= link_to card_image(card, size: :small), card %></div>
   <% end %>
 </div>
 <div class="row my-4 gx-2">
   <% @card.similar_cards.each do |card| %>
-   <div class="col"><%= link_to image_tag(card.images.small, alt: card, title: card, class: "img-fluid"), card %></div>
+   <div class="col"><%= link_to card_image(card, size: :small), card %></div>
   <% end %>
 </div>
