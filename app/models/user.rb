@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
 class User < ApplicationRecord
-  include HasManyCards
-
   has_secure_token :confirmation_token
   has_secure_password
 
@@ -13,6 +11,7 @@ class User < ApplicationRecord
 
   validates :username, presence: true, uniqueness: { case_sensitive: false }
 
+  has_many :cards, dependent: :destroy_async, extend: HasManyCards
   has_many :decks, dependent: :destroy_async
 
   class << self

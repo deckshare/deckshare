@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_03_19_222642) do
+ActiveRecord::Schema[7.1].define(version: 2024_03_20_002108) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -65,6 +65,17 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_19_222642) do
     t.index ["types"], name: "index_pokemon_cards_on_types", using: :gin
   end
 
+  create_table "pokemon_deck_cards", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "deck_id", null: false
+    t.uuid "pokemon_card_id", null: false
+    t.integer "quantity"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["deck_id", "pokemon_card_id"], name: "index_pokemon_deck_cards_on_deck_id_and_pokemon_card_id", unique: true
+    t.index ["deck_id"], name: "index_pokemon_deck_cards_on_deck_id"
+    t.index ["pokemon_card_id"], name: "index_pokemon_deck_cards_on_pokemon_card_id"
+  end
+
   create_table "pokemon_sets", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "set_id"
     t.string "name"
@@ -107,5 +118,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_19_222642) do
 
   add_foreign_key "decks", "users"
   add_foreign_key "pokemon_cards", "pokemon_sets"
+  add_foreign_key "pokemon_deck_cards", "decks"
+  add_foreign_key "pokemon_deck_cards", "pokemon_cards"
   add_foreign_key "user_cards", "users"
 end

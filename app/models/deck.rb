@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
 class Deck < ApplicationRecord
-  include HasManyCards
-
   belongs_to :user
 
   before_validation :default_name

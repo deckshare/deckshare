@@ -2,8 +2,7 @@
 
 module Pokemon
   class Deck < ::Deck
-    def self.card_type
-      Pokemon::Card
-    end
+    has_many :cards, dependent: :destroy_async, class_name: 'Pokemon::Deck::Card',
+                     extend: HasManyCards
   end
 end

@@ -20,6 +20,8 @@ RSpec.describe Pokemon::Deck do
   describe '#cards' do
     subject(:collection) { deck }
 
+    let(:collection_card) { create(:pokemon_deck_card, deck:, card:, quantity:) }
+
     it_behaves_like 'a collection of cards'
   end
 end

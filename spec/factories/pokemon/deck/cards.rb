@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 FactoryBot.define do
-  factory :user_card, class: 'User::Card' do
-    user { nil }
+  factory :pokemon_deck_card, class: 'Pokemon::Deck::Card' do
+    deck { nil }
     card { nil }
     quantity { 1 }
   end
