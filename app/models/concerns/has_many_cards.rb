@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
-module Collection
+module HasManyCards
   extend ActiveSupport::Concern
 
   included do
-    has_many :cards, as: :collection, dependent: :destroy_async do
+    has_many :cards, dependent: :destroy_async do
       def add!(card, quantity: 1)
         raise RangeError, "#{quantity} not greater than 0" unless quantity.positive?
 

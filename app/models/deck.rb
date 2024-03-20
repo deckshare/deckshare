@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class Deck < ApplicationRecord
-  include Collection
+  include HasManyCards
 
   belongs_to :user
 

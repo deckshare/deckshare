@@ -16,6 +16,8 @@ RSpec.describe User do
   describe '#cards' do
     subject(:collection) { user }
 
+    let(:collection_card) { create(:user_card, user:, card:, quantity:) }
+
     it_behaves_like 'a collection of cards'
   end
 

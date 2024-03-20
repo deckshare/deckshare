@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class User < ApplicationRecord
-  include Collection
+  include HasManyCards
 
   has_secure_token :confirmation_token
   has_secure_password
