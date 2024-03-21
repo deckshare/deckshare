@@ -6,7 +6,7 @@ module Pokemon
       attr_readonly :deck, :card
 
       belongs_to :deck
-      belongs_to :card, foreign_key: :pokemon_card_id, inverse_of: :deck_cards, class_name: 'Pokemon::Card'
+      belongs_to :card, foreign_key: 'pokemon_card_id', inverse_of: :deck_cards, class_name: 'Pokemon::Card'
 
       validates :quantity, numericality: { greater_than: 0 }
 
